@@ -1,0 +1,57 @@
+<form action="" method="post">
+  <div class="card">
+    <div class="card">
+      <div class="card-header">Sign In</div>
+      <div class="card-body">
+        
+        {{#if error}}
+        <div
+          class="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+          <strong>Username or password</strong> is incorrect!
+        </div>
+        {{/if}}
+        
+        <script>
+          var alertList = document.querySelectorAll(".alert");
+          alertList.forEach(function (alert) {
+            new bootstrap.Alert(alert);
+          });
+        </script>
+
+        <div class="mb-3">
+          <label for="txtusername" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtUsername"
+            name="username"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="txtPassword" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="txtPassword"
+            name="password"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-person-fill-add"></i>
+          Sign in
+        </button>
+      </div>
+      <div class="card-footer text-muted">Footer</div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,80 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: #f4f6fa;
+    margin: 0;
+    padding: 0;
+}
+
+.team-header {
+    text-align: center;
+    margin-top: 32px;
+    color: #4a90e2;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+.team-desc {
+    text-align: center;
+    margin-bottom: 32px;
+    color: #333;
+}
+.team-table {
+    margin: 0 auto 32px auto;
+    width: 85%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+.team-table th, .team-table td {
+    padding: 14px 18px;
+    text-align: center;
+}
+.team-table th {
+    background: #4a90e2;
+    color: #fff;
+    font-weight: bold;
+}
+.team-table tr:nth-child(even) {
+    background: #f0f8ff;
+}
+.team-table tr:hover {
+    background: #eaf6ff;
+    transition: background 0.2s;
+}
+.team-table a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+.team-table a:hover {
+    color: #357abd;
+    text-decoration: underline;
+}
+.back-link {
+    display: block;
+    width: 120px;
+    margin: 32px auto 0 auto;
+    padding: 12px 0;
+    background: #4a90e2;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+}
+.back-link:hover {
+    background: #357abd;
+}
+@media (max-width: 700px) {
+    .team-table {
+        width: 98%;
+        font-size: 1rem;
+    }
+    .team-header {
+        font-size: 1.5rem;
+    }
+}

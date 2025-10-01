@@ -1,0 +1,3 @@
+Tìm hiểu 3 cái trên: Ajax paging, client paging, sever paging.
+
+    const page = req.query.page || 1;              //<----- req.query.page lấy từ URL
