@@ -40,20 +40,19 @@ router.get('/byCat', async function (req, res) {
             catname: catname,
             pages: pages,
         });
+});
 
-    router.get('/details', async function (req, res) {
-        const id = req.query.id;
-        const product = await productModel.findById(id);
-        if (product === null) {
-            return res.redirect('/');
-        }
-        
-        res.render('vwProducts/details', {
-            req: req,
-            product: product
-        });
+router.get('/details', async function (req, res) {
+    const id = req.query.id;
+    const product = await productModel.findById(id);
+    if (product === null) {
+        return res.redirect('/');
+    }
+    
+    res.render('vwProducts/details', {
+        req: req,
+        product: product
     });
-
 });
 
 export default router;

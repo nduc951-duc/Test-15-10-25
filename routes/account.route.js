@@ -59,7 +59,7 @@ router.get('/is-available', async function (req, res) {
 router.post('/signout', function (req, res) {
   req.session.isAuthenticated = false;
   req.session.authUser = null;
-  res.redirect('/');
+  res.redirect(req.headers.referer);
 });
 
 function restrict(req, res, next) {
