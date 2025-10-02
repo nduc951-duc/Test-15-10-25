@@ -5,10 +5,10 @@ import * as categoryModel from '../models/category.model.js';
 const router = express.Router();
 
 router.get('/', async function (req, res) {
-    const categories = await categoryModel.findAll();
-    res.render('vwCategories/list', {
-        req: req,
-        categories: categories
+    const list = await categoryModel.findAll();
+    res.render('vwAdminCategory/list',{
+        req:req,
+         categories: list
     });
 });
     

@@ -6,7 +6,7 @@ import hbs_sections from 'express-handlebars-sections';
 import session from 'express-session';
 
 import accountRouter from './routes/account.route.js';
-import { restrict } from './middlewares/auth.mdw.js';
+import { restrict, restrictAdmin } from './middlewares/auth.mdw.js';
 import categoryRouter from './routes/category.route.js';
 import productRouter from './routes/product.route.js';
 
@@ -113,7 +113,7 @@ app.use('/products', productRouter);
 
 app.use('/account', accountRouter);
 
-app.use('/admin/categories', categoryRouter);
+app.use('/admin/categories', restrict, restrictAdmin, categoryRouter);
 
 
 app.listen(3000, function () {
