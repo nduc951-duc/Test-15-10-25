@@ -5,6 +5,14 @@ import { publicDecrypt } from 'crypto';
 
 const router = express.Router();
 
+router.get('/', async function (req, res) {
+    const products = await productModel.findAll();
+    res.render('vwProducts/list', {
+        req: req,
+        products: products
+    });
+});
+
 router.get('/byCat', async function (req, res) {
     const id = req.query.id || 0;
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import * as userModel from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
+import { restrict } from '../middlewares/auth.mdw.js';
 
 const router = express.Router();
 
@@ -57,19 +58,11 @@ router.get('/is-available', async function (req, res) {
 });
 
 router.post('/signout', function (req, res) {
-  req.session.isAuthenticated = false;
-  req.session.authUser = null;
-  res.redirect(req.headers.referer);
-});
-
-function restrict(req, res, next) {
-    if (req.session.isAuthenticated) {
-        next();
-    } else {
-        res.redirect('/account/signin');
-    }
-  }
-
+    req.session.isAuthenticated = false;
+    req.session.authUser = null;
+    res.redirect('/');
+  });
+  
 router.get('/profile',restrict, function (req, res) {
     res.render('vwAccount/profile', {
         user: req.session.authUser
@@ -92,5 +85,37 @@ router.post('/profile', restrict, async function (req, res) {
         user: req.session.authUser
     });
 });
+
+router.get('/change-password', restrict, function (req, res) {
+    res.render('vwAccount/change-pwd', {
+        req: req,
+        user: req.session.authUser,
+    });
+});
+
+router.post('/change-password', restrict, async function (req, res) {
+    const id = req.body.id;
+    const curpwd = req.body.curPwd; // fixed case
+    const newpwd = req.body.newPwd; // fixed case
+
+    // compare current password
+    const ret = bcrypt.compareSync(curpwd, req.session.authUser.password);
+    if (!ret) {
+        return res.render('vwAccount/change-pwd', {
+            user: req.session.authUser,
+            error: true
+        });
+    }
+
+    // hash new password
+    const hash_password = bcrypt.hashSync(newpwd, 10);
+    await userModel.patch(id, { password: hash_password });
+
+    // update session
+    req.session.authUser.password = hash_password;
+
+    res.redirect('/account/profile');
+});
+
 
 export default router;

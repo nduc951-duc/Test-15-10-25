@@ -29,7 +29,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Sign Out</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
@@ -38,50 +38,51 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
         <ul class="navbar-nav ms-auto">
           {{#if isAuthenticated}}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle d-flex align-items-center"
-                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle me-2"></i>
-                Welcome, {{authUser.name}}
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                  <a class="dropdown-item" href="/account/profile">
-                    <i class="bi bi-person me-2"></i> Profile
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/account/change-password">
-                    <i class="bi bi-key me-2"></i> Change Password
-                  </a>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome, <b>{{authUser.name}}</b>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="account/profile">
+                  <i class="bi bi-person-circle"></i>
+                  Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/account/change-password">
+                  <i class="bi bi-key"></i>
+                  Change Password
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
                 <a class="dropdown-item" href="javascript: document.querySelector('#frmSignout').submit();">
                   <i class="bi bi-box-arrow-right"></i>
                   Sign Out
                 </a>
               </li>
-              </ul>
-            </li>
-            <form id="frmSignout" action="/account/signout" method="post"></form>
+            </ul>
+          </li>
+          <form id="frmSignout" action="/account/signout" method="post"></form>
           {{else}}
-            <li class="nav-item">
-              <a class="nav-link" href="/account/signup">
-                <i class="bi bi-person-fill-add"></i> Sign up
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/account/signin">
-                <i class="bi bi-person-fill"></i> Login
-              </a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/account/signup">
+              <i class="bi bi-person-plus"></i>
+              Sign Up
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/account/signin">
+              <i class="bi bi-box-arrow-in-right"></i>
+              Sign In
+            </a>
+          </li>
           {{/if}}
         </ul>
-      </form>
     </div>
   </div>
  </nav>

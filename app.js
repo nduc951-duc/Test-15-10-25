@@ -5,6 +5,11 @@ import { engine } from 'express-handlebars';
 import hbs_sections from 'express-handlebars-sections';
 import session from 'express-session';
 
+import accountRouter from './routes/account.route.js';
+import { restrict } from './middlewares/auth.mdw.js';
+import categoryRouter from './routes/category.route.js';
+import productRouter from './routes/product.route.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
@@ -17,26 +22,24 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-app.use((req, res, next) => {
-    res.locals.isAuthenticated = req.session.isAuthenticated;
-    res.locals.authUser = req.session.authUser;
+app.use(function (req, res, next) {
+    if (req.session.isAuthenticated) {
+      res.locals.isAuthenticated = true;
+      res.locals.authUser = req.session.authUser;
+    }
     next();
   });
+  
 
 app.engine('handlebars', engine({
-    helpers: {
-        isAuthenticated: function (req, options) {
-            if (req.session && req.session.authUser) {
-                return options.fn(this);
-            }
-            return options.inverse(this);
-        },
-      fillContent: hbs_sections(),
-      format_number(value) {
-        return new Intl.NumberFormat('en-US').format(value);
-      }
-    }
-  }));
+  helpers: {
+    fillContent: hbs_sections(),
+    formatNumber(value) {
+      return new Intl.NumberFormat('en-US').format(value);
+    },
+    eq(a, b) { return a === b; }
+  }
+}));
   
 app.use(express.urlencoded({ extended: true }));
 app.use('/static', express.static('static'));
@@ -106,14 +109,12 @@ app.get('/', async function (req, res) {
     });
 });
 
-import accountRouter from './routes/account.route.js';
+app.use('/products', productRouter);
+
 app.use('/account', accountRouter);
 
-import categoryRouter from './routes/category.route.js';
 app.use('/admin/categories', categoryRouter);
 
-import productRouter from './routes/product.route.js';
-app.use('/products', productRouter);
 
 app.listen(3000, function () {
     console.log('Server is running on port 3000');
