@@ -31,7 +31,9 @@ router.post('/signin', async function (req, res) {
   
     req.session.isAuthenticated = true;
     req.session.authUser = user;
-    res.redirect('/');
+    const retUrl = req.session.retUrl || '/';
+    delete req.session.retUrl;
+    res.redirect(retUrl);
   });
 
 router.post('/signup', async function (req, res) {

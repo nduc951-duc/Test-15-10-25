@@ -31,15 +31,16 @@ app.use(function (req, res, next) {
   });
   
 
-app.engine('handlebars', engine({
-  helpers: {
-    fillContent: hbs_sections(),
-    formatNumber(value) {
-      return new Intl.NumberFormat('en-US').format(value);
-    },
-    eq(a, b) { return a === b; }
-  }
-}));
+  app.engine('handlebars', engine({
+    helpers: {
+      // thêm helper định dạng số
+      format_number(value) {
+        return new Intl.NumberFormat('en-US').format(value);
+      },
+      // nếu bạn đã dùng hbs_sections trước đó, giữ nó
+      fillContent: hbs_sections(),
+    }
+  }));
   
 app.use(express.urlencoded({ extended: true }));
 app.use('/static', express.static('static'));
@@ -115,6 +116,9 @@ app.use('/account', accountRouter);
 
 app.use('/admin/categories', restrict, restrictAdmin, categoryRouter);
 
+app.use(function(req, res){
+    res.status(404).render('404');
+});
 
 app.listen(3000, function () {
     console.log('Server is running on port 3000');

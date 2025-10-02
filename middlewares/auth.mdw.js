@@ -3,6 +3,7 @@ export function restrict(req, res, next) {
     if (req.session.isAuthenticated) {
         next();
     } else {
+        req.session.retUrl = req.originalUrl;
         res.redirect('/account/signin');
     }
   }
