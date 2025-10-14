@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     {{{_sections.css}}}
+    
+    <style>
+      /* Đảm bảo hình ảnh không bị tràn ra ngoài */
+      .article-content img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Giúp căn giữa nếu có margin: auto */
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Căn giữa cho văn bản và các phần tử khác */
+      .article-content .ql-align-center {
+        text-align: center;
+      }
+
+      /* Căn giữa cho video/iframe */
+      .article-content .ql-video.ql-align-center {
+        margin: 0 auto;
+      }
+    </style>
 </head>
 <body>
 
@@ -95,15 +116,9 @@
   </div>
  </nav>
 
- <div class = "container-fluid mt-4">
-    <div class ="row">
-        <div class = "col-12">
-            <div class="card">
-                    {{{body}}}
-            </div>
-        </div>
-    </div>
- </div>
+<main class="container mt-4">
+    {{{body}}}
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     {{{_sections.js}}}

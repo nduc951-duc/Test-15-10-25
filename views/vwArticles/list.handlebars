@@ -1,38 +1,28 @@
 <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h5> Danh sách bài viết</h5>
-        <a href="/articles/create" class="btn btn-primary btn-sm">
-        <i class="bi bi-plus-circle"></i> Thêm mới
-        </a>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5> Danh sách bài viết</h5>
+            <a href="/articles/create" class="btn btn-primary btn-sm">
+                <i class="bi bi-plus-circle"></i> Thêm mới
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {{#each articles}}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{title}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Tác giả: {{author}}</h6>
+                            <p class="card-text">{{abstract}}</p>
+                            <p class="card-text"><small class="text-muted">Chuyên mục: {{category_name}}</small></p>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="/articles/detail?id={{id}}" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <div table class="table-hover">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tiêu đề</th>
-                        <th>Tác giả</th>
-                        <th>Tóm tắt</th>
-                        <th>Chuyên mục</th>
-                        <th>Premium</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each articles}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td>{{title}}</td>
-                        <td>{{author}}</td>
-                        <td>{{abstract}}</td>
-                        <td>{{category_name}}</td>
-                        <td>{{#if isPremium}}Yes{{else}}No{{/if }}</td>
-                        <td class = "text-end">
-                            <a href="/articles/detail?id={{id}}" class="btn btn-outline-primary btn-sm">Xem</a>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-    </div>
-</div>
+    
