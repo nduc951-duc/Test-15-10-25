@@ -63,4 +63,28 @@ router.get('/details', async function (req, res) {
     });
 });
 
+router.get('/search', async function (req, res) {
+    const q = req.query.q || '';
+    if (q.length === 0) {
+        return res.render('vwProducts/search', {
+            req: req,
+            q: q,
+            empty: true,
+            products: [],
+        });
+    }
+
+    const keywords = q.replace(/ /g,' & ');
+    // for (let i = 0; i < keywords.length; i++) {  
+    //     keywords[i] = keywords[i].trim();
+    // }
+    const products = await productModel.search(keywords);
+    res.render('vwProducts/search', {
+        req: req,
+        q: q,
+        empty: products.length === 0,
+        products: products,
+    });
+});
+
 export default router;

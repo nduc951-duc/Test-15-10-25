@@ -9,6 +9,7 @@ import accountRouter from './routes/account.route.js';
 import { restrict, restrictAdmin } from './middlewares/auth.mdw.js';
 import categoryRouter from './routes/category.route.js';
 import productRouter from './routes/product.route.js';
+import productAdminRouter from './routes/product-admin.route.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -115,6 +116,8 @@ app.use('/products', productRouter);
 app.use('/account', accountRouter);
 
 app.use('/admin/categories', restrict, restrictAdmin, categoryRouter);
+
+app.use('/admin/products', restrict, restrictAdmin, productAdminRouter);
 
 app.use(function(req, res){
     res.status(404).render('404');

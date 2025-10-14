@@ -1,0 +1,37 @@
+<div class="card">
+     <h5 class="card-header d-flex justify-content-between justify-content-center">
+        products
+        <a name ="" id="" class="btn btn-primary btn-sm float-end" href="/admin/products/add" role="button">
+        <i class="bi bi-plus-circle"></i>
+         New products
+    </a>
+</h5>
+<div class="card-body">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col" class = 'text-center'>#</th>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col" class="text-end">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+    <tr>
+      <th scope="row" class = 'text-center'>{{proid}}</th>
+      <td>{{proname}}</td>
+      <td>{{format_number price}}</td>
+      <td>{{quantity}}</td>
+      <td class="text-end">  
+        <a name ="" id="" class="btn btn-primary btn-sm float-end" href="/admin/categories/edit?id={{proid}}" role="button">
+          <i class="bi bi-pencil-square"></i>
+      </a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+</div>

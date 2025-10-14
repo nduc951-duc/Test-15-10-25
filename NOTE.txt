@@ -1,3 +1,34 @@
 Tìm hiểu 3 cái trên: Ajax paging, client paging, sever paging.
 
     const page = req.query.page || 1;              //<----- req.query.page lấy từ URL
+
+
+Thư viện:
+        Quill.js: tạo ô textbox (trong đó ng dùng nhập bth nhưng trả về là html)
+        Cleave: number formating chỉ cho input số và tự động thêm dấu , phân hàng ngàn(dùng parseint để trả về kiểu bth)
+        uppy: để dùng tạo ô nhập file như hình ảnh vô.
+        multer: lấy được file từ uppy rồi chép vô static.
+        
+
+
+Code SQL: (dùng tạo bảng full text search)
+        alter table products
+        add column
+        fts tsvector generated always as (to_tsvector('english', remove_accents(proname) || ' ' || remove_accents(tinydes))) stored;
+
+        
+        create index products_fts on products using gin (fts); -- generate the index
+
+
+        select proid, fts
+        from products;
+
+
+        select *
+        from products
+        where fts @@ to_tsquery(remove_accents('tinh & xao'));
+
+
+
+
+

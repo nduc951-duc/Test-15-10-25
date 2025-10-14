@@ -25,3 +25,15 @@ export function countByCat(catid){
     .first();
 }
 
+export function search(keyword){
+    return db('products')
+    .whereRaw(`fts @@ to_tsquery(remove_accents(?))`, [keyword]);
+}
+
+export function findAll(){
+    return db('products');
+}
+
+export function add(product){
+    return db('products').insert(product).returning('proid');
+}
