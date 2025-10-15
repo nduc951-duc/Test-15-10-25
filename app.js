@@ -5,8 +5,8 @@ import { engine } from 'express-handlebars';
 import hbs_sections from 'express-handlebars-sections';
 
 // Import model và router cần thiết cho bài thi
-import * as categoryModel from './models/category.model.js';
-import articleRouter from './routes/article.route.js';
+import * as cuisineModel from './models/cuisine.model.js';
+import recipeRoute from './routes/recipe.route.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -33,8 +33,8 @@ app.use('/static', express.static('static'));
 // Middleware toàn cục: Lấy danh sách chuyên mục để hiển thị trên layout
 app.use(async function (req, res, next) {
     try {
-        const categories = await categoryModel.findAll();
-        res.locals.globalCategories = categories; // Gán vào res.locals để tất cả view đều dùng được
+        const cuisines = await cuisineModel.findAll();
+        res.locals.globalCuisines = cuisines; // Gán vào res.locals để tất cả view đều dùng được
         next();
     } catch (error) {
         console.error("Lỗi khi lấy danh sách chuyên mục:", error);
@@ -45,11 +45,11 @@ app.use(async function (req, res, next) {
 // Route chính
 // Trang chủ sẽ chuyển hướng thẳng đến trang danh sách bài viết
 app.get('/', function (req, res) {
-    res.redirect('/articles');
+    res.redirect('/recipes');
 });
 
 // Gắn router xử lý các yêu cầu liên quan đến '/articles'
-app.use('/articles', articleRouter);
+app.use('/recipes', recipeRoute);
 
 // 4. XỬ LÝ LỖI
 // Middleware xử lý lỗi 404 (khi không tìm thấy route)

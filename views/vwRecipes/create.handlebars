@@ -1,0 +1,74 @@
+{{#fillContent 'css'}}
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+{{/fillContent}}
+
+{{#fillContent 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+         const quill = new Quill('#editor', {
+    theme: 'snow'
+    });
+
+    document.querySelector('#frmCreate').addEventListener('submit', function(e) {
+        document.querySelector('#instructions').value = quill.root.innerHTML;
+    });
+</script>
+{{/fillContent}}
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h5>Tạo bài công thức mới</h5>
+    </div>
+    <div class="card-body">
+        <form action="/recipes/create" id="frmCreate" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Tiêu đề</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">Tác giả</label>
+                <input type="text" class="form-control" id="author" name="author" required>
+            </div>
+            <div class="mb-3">
+                <label for="cover_image_url" class="form-label">Đường dẫn hình ảnh minh hoạ</label>
+                <textarea class="form-control" id="cover_image_url" name="cover_image_url" required></textarea>
+            </div>
+             <div class="mb-3">
+                <label for="ingredients" class="form-label">Nguyên liệu</label>
+                <textarea class="form-control" id="ingredients" name="ingredients" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="instructions" class="form-label">Hướng dẫn</label>
+                <div id="editor" style="height: 250px;"></div>
+                <input type="hidden" id="instructions" name="instructions">
+            </div>
+            <div class="mb-3">
+                <label for="difficulty" class="form-label">Độ khó</label>
+                <select class="form-select" id="difficulty" name="difficulty" required>
+                    <option value="easy">Dễ</option>
+                    <option value="medium">Trung bình</option>
+                    <option value="hard">Khó</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="cuisine_id" class="form-label">Nền ẩm thực</label>
+                <select class="form-select" id="cuisine_id" name="cuisine_id" required>
+                    {{#each cuisines}}
+                    <option value="{{id}}">{{cuisine_name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-outline-secondary" href="/recipes" role="button">
+                <i class="bi bi-arrow-left"></i> Quay lại
+                </a>
+                <button type="submit" class="btn btn-success">
+                <i class="bi bi-check"></i> Lưu
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer text-muted">Footer</div>
+</div>

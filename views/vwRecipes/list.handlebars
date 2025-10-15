@@ -1,23 +1,24 @@
 <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5> Danh sách bài viết</h5>
-            <a href="/articles/create" class="btn btn-primary btn-sm">
+            <h5> Danh sách công thức nấu ăn</h5>
+            <a href="/recipes/create" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-circle"></i> Thêm mới
             </a>
         </div>
         <div class="card-body">
             <div class="row">
-                {{#each articles}}
+                {{#each recipes}}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">{{title}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Tác giả: {{author}}</h6>
-                            <p class="card-text">{{abstract}}</p>
-                            <p class="card-text"><small class="text-muted">Chuyên mục: {{category_name}}</small></p>
+                            <img src="{{cover_image_url}}" alt="Cover Image" class="img-fluid mb-2"/>
+                            <p class="card-text">{{cuisine_name}}</p>
+                            <p class="card-text"><small class="text-muted">Độ khó: {{difficulty}}</small></p>
                         </div>
                         <div class="card-footer text-end">
-                            <a href="/articles/detail?id={{id}}" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                            <a href="/recipes/detail?id={{id}}" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
